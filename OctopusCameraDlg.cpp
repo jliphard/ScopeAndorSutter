@@ -37,7 +37,6 @@ I think you want something like GetNumberNewImages( &u16_NumberNewImages ) and j
 Why should the user have to worry about your internal circular buffering setup?  		
 **********************************************************************************/
 
-
 #include "stdafx.h"
 #include "atmcd32d.h"
 #include "Octopus.h"
@@ -57,11 +56,12 @@ Why should the user have to worry about your internal circular buffering setup?
 
 DWORD WINAPI FocusThread(LPVOID lpParameter);
 
-extern COctopusGlobals    B;
-extern COctopusLog*       glob_m_pLog;
-COctopusPictureDisplay*   glob_m_pPictureDisplay = NULL;
-extern COctopusGoodClock* glob_m_pGoodClock;
-extern COctopusMultifunction*    glob_m_pNI;
+extern COctopusGlobals    	B;
+extern COctopusLog*       	glob_m_pLog;
+extern COctopusGoodClock* 	glob_m_pGoodClock;
+extern COctopusMultifunction*   glob_m_pNI;
+
+COctopusPictureDisplay*   	glob_m_pPictureDisplay = NULL;
 
 COctopusCamera::COctopusCamera(CWnd* pParent)
 	: CDialog(COctopusCamera::IDD, pParent)
@@ -338,18 +338,10 @@ void COctopusCamera::Opencam()
 	m_g1_text1.SetWindowText( str );
 	m_g1_text2.SetWindowText( str );
 
-/*
-	if ( FrameTransfer )
-		CheckDlgButton(IDC_CAS_FT, BST_CHECKED);
-	else
-		CheckDlgButton(IDC_CAS_FT, BST_UNCHECKED);
-*/
-
 	if( FrameTransfer ) 
 		m_ctlFTCheckBox.SetCheck( 1 );
 	else
 		m_ctlFTCheckBox.SetCheck( 0 );
-
 
 	if ( glob_m_pLog != NULL ) 
 		glob_m_pLog->Write(" COctopusCamera::OpenCam() ");
@@ -427,9 +419,9 @@ void COctopusCamera::TakePicture( double exposuretime_ms, int gain )
         SetEMCCDGain( gain );
     
 	if ( B.Andor_new )
-		SetShutter( 0, 1, 0, 0 ); // Always open
+		SetShutter( 0, 1, 0, 0 ); // Always Open, new syntax
 	else
-		SetShutter( 1, 1, 0, 0 ); // Always Open
+		SetShutter( 1, 1, 0, 0 ); // Always Open, old syntax
 	
 	if ( B.ROI_changed ) 
 		SetROI();
@@ -469,8 +461,8 @@ void COctopusCamera::StartMovie( void )
 
 	DisableDlgMovie();
 
-	SetAcquisitionMode( 5 );		// set to run till abort
-	SetReadMode( 4 );				// image mode
+	SetAcquisitionMode( 5 );	// set to run till abort
+	SetReadMode( 4 );		// image mode
 
 	SetExposureTime( float(u32_Exposure_Time_Movie_ms) * 0.001 );
 	
