@@ -74,28 +74,25 @@ COctopusMPC200::COctopusMPC200(CWnd* pParent)
 
 	actuator = NULL;
 	actuator = new ROE200;
-	
-	moving_x = false;
-	m_AXIS   = 1; // 0 = X
 
-	m_nNewX   = 0;
-	m_nNewY   = 0;
-	m_nNewZ   = 0;
+	m_nNewX   	= 0;
+	m_nNewY   	= 0;
+	m_nNewZ   	= 0;
 
-	m_nID     = 1;
-	m_nSpeed  = 3;
+	m_nID     	= 1;
+	m_nSpeed  	= 3;
 	
 	m_nXCurr_Micron = 0;
 	m_nYCurr_Micron = 0;
 	m_nZCurr_Micron = 0;
 
-	   XCurr_Step   = 0;
-	   YCurr_Step   = 0;
-	   ZCurr_Step   = 0;
+	XCurr_Step   	= 0;
+	YCurr_Step   	= 0;
+	ZCurr_Step   	= 0;
 
-	m_nStepX  = 0;
-	m_nStepY  = 0;
-	m_nStepZ  = 0;
+	m_nStepX  	= 0;
+	m_nStepY  	= 0;
+	m_nStepZ  	= 0;
 	
 	VERIFY(m_bmp_no.LoadBitmap(IDB_NO));
 	VERIFY(m_bmp_yes.LoadBitmap(IDB_YES));
@@ -105,7 +102,7 @@ COctopusMPC200::COctopusMPC200(CWnd* pParent)
 	run_the_wait_thread = false;
 
 	systemtime = CTime::GetCurrentTime();
-    CString t  = systemtime.Format(_T("%H_%M_%S"));
+    	CString t  = systemtime.Format(_T("%H_%M_%S"));
 	CString d  = systemtime.Format(_T("%m_%d_%y/"));
 	std::string dd=(CT2CA(d));
 	std::string tt=(CT2CA(t));
@@ -129,7 +126,6 @@ COctopusMPC200::COctopusMPC200(CWnd* pParent)
 		ShowWindow( SW_SHOW );
 
 	SetTimer( TIMER_MPC, 100, NULL ); 
-	
 }
 
 BOOL COctopusMPC200::OnInitDialog() 
@@ -171,7 +167,6 @@ void COctopusMPC200::DoDataExchange(CDataExchange* pDX)
 	
 	DDX_Radio( pDX, IDC_MPC_X, m_AXIS );
 	DDX_Control(pDX, IDC_MPC200_LIST_SEQUENCE, m_SeqList);
-
 }
 
 BEGIN_MESSAGE_MAP(COctopusMPC200, CDialog)
@@ -193,20 +188,20 @@ void COctopusMPC200::OnTimer( UINT_PTR nIDEvent )
 	{
 		CString str;
 		
-        str.Format(_T("X: %0.3f"), m_nXCurr_Micron); m_X_Now.SetWindowText( str );
+        	str.Format(_T("X: %0.3f"), m_nXCurr_Micron); m_X_Now.SetWindowText( str );
 		str.Format(_T("Y: %0.3f"), m_nYCurr_Micron); m_Y_Now.SetWindowText( str );
 		str.Format(_T("Z: %0.3f"), m_nZCurr_Micron); m_Z_Now.SetWindowText( str );
 
 		systemtime     = CTime::GetCurrentTime();
 		CString stime  = systemtime.Format(_T(" %m/%d/%y %H:%M:%S "));
 		
-        CString out;
-        out.Format(_T("T:%.3f "), (double)glob_m_pGoodClock->End());
-        out.Append( stime );
-        out.AppendFormat( _T(" MPC200 POS: %f %f %f\n"), m_nXCurr_Micron, m_nYCurr_Micron, m_nZCurr_Micron);
-        fprintf( pFile, out );
-        fflush( pFile );
-    }
+        	CString out;
+        	out.Format(_T("T:%.3f "), (double)glob_m_pGoodClock->End());
+        	out.Append( stime );
+	 	out.AppendFormat( _T(" MPC200 POS: %f %f %f\n"), m_nXCurr_Micron, m_nYCurr_Micron, m_nZCurr_Micron);
+        	fprintf( pFile, out );
+        	fflush( pFile );
+    	}
     
 	CDialog::OnTimer(nIDEvent);
 }
