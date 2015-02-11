@@ -3,8 +3,8 @@ Copyright (c) 2003 Jan T. Liphardt (JTLiphardt@lbl.gov),
 Lawrence Berkeley National Laboratory
 */
 
-#if !defined(AFX_H_OctopusCascadeGlobals)
-#define AFX_H_OctopusCascadeGlobals
+#if !defined(AFX_H_OctopusGlobals)
+#define AFX_H_OctopusGlobals
 
 #include "stdafx.h"
 
