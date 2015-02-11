@@ -52,12 +52,12 @@ public:
 	CBitmap m_bmp_yes;
 	CBitmap m_bmp_no;
 
-	int		m_nID;
-	int		m_nSpeed;
+	int	m_nID;
+	int	m_nSpeed;
 	
-	long   XCurr_Step;
-	long   YCurr_Step;
-	long   ZCurr_Step;
+	long   	XCurr_Step;
+	long   	YCurr_Step;
+	long   	ZCurr_Step;
 
 	double	m_nXCurr_Micron;
 	double	m_nYCurr_Micron;
