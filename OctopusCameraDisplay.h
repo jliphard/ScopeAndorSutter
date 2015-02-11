@@ -49,9 +49,9 @@ protected:
 	void Draw_Bitmap( void );
 	void UpdateTitle( void );
 
-	bool	Marking;
-	u16		Width; 
-	u16		Height;
+	bool Marking;
+	u16 Width; 
+	u16 Height;
 
 	u32 LengthOneFrame;
 	u32 FullFrame;
