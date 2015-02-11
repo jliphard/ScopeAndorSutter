@@ -6,7 +6,6 @@
 #include "Octopus.h"
 #include "MainFrm.h"
 #include "OctopusView.h"
-#include "CDMG17Motor.h"
 
 COctopusApp::COctopusApp() {}
 
