@@ -1,3 +1,26 @@
+/*****************************************************************************
+ Octopus microscope control software
+ 
+ Copyright (C) 2004-2015 Jan Liphardt (jan.liphardt@stanford.edu)
+ 
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ ******************************************************************************/
+
+/***************************Basically ready for Mindy*************************/
+/*****************************************************************************/
+
 #if !defined(AFX_H_OctopusMPC200)
 #define AFX_H_OctopusMPC200
 
@@ -10,7 +33,7 @@ class COctopusMPC200 : public CDialog
 
 public:
 	
-	COctopusMPC200(CWnd* pParent = NULL);	// standard constructor
+    COctopusMPC200(CWnd* pParent = NULL);
 	~COctopusMPC200();
 
 	enum { IDD = IDC_MPC200 };
@@ -26,33 +49,8 @@ public:
 	long    m_nStepY;
 	long    m_nStepZ;
 
-	long	m_nFB_Step;
-	long	m_nFB_Speed;
-	long	m_nFB_Cycles;
-	double  m_nFB_Angle;
-
 	CBitmap m_bmp_yes;
 	CBitmap m_bmp_no;
-
-	CStatic m_status_feedback;
-	CStatic m_status_spreading;
-
-	int m_AXIS;
-
-	long	m_nFB_Fast_Cycles;
-	long	m_nFB_Fast_Amplitude;
-	long	m_nFB_Fast_Speed;
-	long    m_nFB_Fast_Wait_ms;
-
-	long	m_nFB_Slow_Cycles;
-	long	m_nFB_Slow_Amplitude;
-	long	m_nFB_Slow_Speed;
-	long    m_nFB_Slow_Wait_ms;
-
-	double  m_nCFFL_K;
-	double  m_nCFFL_Target_force;
-	double  m_nCFFL_Margin;
-	long    m_nCFFL_Speed;
 
 	int		m_nID;
 	int		m_nSpeed;
@@ -69,29 +67,6 @@ public:
 	CStatic	m_Y_Now;
 	CStatic	m_Z_Now;
 
-	CStatic m_VOLTAGE_Now;
-	CStatic m_FORCE_Now;
-	CStatic m_FORCE_AVG_Now;
-
-	double	d_FORCE;
-	double	d_FORCE_AVG;
-	double	d_VOLTAGE;
-	double	d_OFFSET;
-	double  m_nFB_Probe_Sensitivity_uNperV;
-	long    m_nFB_Lower_Mov_Limit;
-
-	long m_SPREAD_SS;
-	long m_SPREAD_DELAY;
-	long m_SPREAD_CYCLES;
-	long m_SPREAD_CYCLES_DONE;
-
-	bool spreading;
-	bool feedback;
-
-	//long count;
-	//double direct;
-	//void StopThread( void );
-	
 	bool run_the_wait_thread;
 	CListBox m_SeqList;
 
@@ -100,16 +75,10 @@ public:
 
 protected:
 
-	void ConstantForceFeedback( double K, double Target_Force, double Margin, int v, double d_FORCE_AVG );
-
 	FILE * pFile;
 	FILE * fFile;
 
 	CTime systemtime;
-
-	bool moving_x;
-
-	double m_nStep_FB_microns;
 
 	virtual void DoDataExchange(CDataExchange* pDX);
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
@@ -118,27 +87,13 @@ protected:
 
 	afx_msg void OnStop( void );
 	afx_msg void OnGotoCenter( void );
-
 	afx_msg void OnStepXYZ( void );
-
-	afx_msg void OnMoveFwdBackFast( void );
-	afx_msg void OnMoveFwdBackSlow( void );
-
-	afx_msg void OnForceZero( void );
-
-	afx_msg void OnFeedbackStart( void );
-	afx_msg void OnFeedbackStop( void );
-
-	afx_msg void  OnSpreadStart(void);
-	afx_msg void  OnSpreadStop(void);
-
-	void OnAxisX();
-	void OnAxisZ();
 
 	HANDLE WaitThreadMove;
 	HANDLE wait_thread_cmd;
 
 	ROE200* actuator;
+    
 	bool moving;
 
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
