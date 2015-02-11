@@ -16,7 +16,9 @@ public:
 	~ROE200(void);
 
 	int Initialize( void );
+	
 	void Close( void );
+	
 	void GotoCenter( void );
 
 	void StepXYZ( double x, double y, double z, int v );
@@ -31,19 +33,7 @@ protected:
 
 	bool busy;
 	void UpdatePosition( void );
-
-	double CalculateMoveDuration( double xn, double yn, double zn, double xt, double yt, double zt, double vel );
 	double CalculateMoveDuration( double dx, double dy, double dz, double vel );
-
-	void OnVectorMove_XZ( double x, double z, int v );
-	void OnVectorMove_X(  double x,           int v );
-	void OnVectorMove_Z(  double z,           int v );
-
-	//done
-	void Step_X( long target_steps  , long currentsteps_y, long currentsteps_z );
-	void Step_Z( long currentsteps_x, long currentsteps_y, long target_steps );
-
-
 	FT_HANDLE ftHandle;
 
 	double	gXCurr_Micron;
